@@ -1,0 +1,53 @@
+server:
+  port: 8181
+spring:
+  datasource:
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/online_office?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    hikari:
+      pool-name: DateHikariCP
+      minimum-idle: 5
+      idle-timeout: 100000
+      maximum-pool-size: 10
+      auto-commit: true
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    timeout: 10000ms
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-active: 1024
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+    #消息确认回调
+    publisher-confirm-type: correlated
+    #消息失败回调
+    publisher-returns: true
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.simmon.workserver.domain
+  configuration:
+    map-underscore-to-camel-case: false
+logging:
+  level:
+    com.simon.workserver.mapper: debug
+
+jwt:
+  tokenHeader: Authorization
+  secret: simmon
+  expiration: 604800
+  tokenHead: Bearer
+
